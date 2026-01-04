@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -15,281 +15,220 @@
     }
 
     :root {
-      --neon-cyan: #00fff7;
-      --neon-magenta: #ff00ff;
-      --neon-yellow: #fffc00;
-      --dark-bg: #0a0a0f;
-      --card-bg: rgba(18, 18, 28, 0.85);
-      --glow-cyan: 0 0 10px rgba(0, 255, 247, 0.5), 
-                   0 0 20px rgba(0, 255, 247, 0.3),
-                   0 0 30px rgba(0, 255, 247, 0.2);
-      --glow-magenta: 0 0 10px rgba(255, 0, 255, 0.5), 
-                      0 0 20px rgba(255, 0, 255, 0.3),
-                      0 0 30px rgba(255, 0, 255, 0.2);
+      --bg-dark: #0a0a0a;
+      --bg-light: #fafafa;
+      --text-dark: #1a1a1a;
+      --text-light: #ffffff;
+      --accent-left: #2563eb;
+      --accent-right: #dc2626;
+      --border-color: rgba(0, 0, 0, 0.08);
+      --card-bg: #ffffff;
+      --hover-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
     }
 
     body {
-      background: var(--dark-bg);
-      color: #fff;
-      font-family: 'Share Tech Mono', monospace;
-      min-height: 100vh;
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
       overflow-x: hidden;
-      position: relative;
-    }
-
-    /* Animated background grid */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: 
-        linear-gradient(rgba(0, 255, 247, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 247, 0.05) 1px, transparent 1px);
-      background-size: 50px 50px;
-      animation: gridScroll 20s linear infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    @keyframes gridScroll {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(50px); }
-    }
-
-    /* Glowing orbs in background */
-    body::after {
-      content: '';
-      position: fixed;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(255, 0, 255, 0.15), transparent 70%);
-      top: -250px;
-      right: -250px;
-      border-radius: 50%;
-      animation: float 8s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(-50px, 50px) scale(1.1); }
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      background: rgba(10, 10, 15, 0.95);
-      backdrop-filter: blur(10px);
-      padding: 20px 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 2px solid var(--neon-cyan);
-      box-shadow: 0 4px 20px rgba(0, 255, 247, 0.3);
-    }
-
-    nav a {
-      color: var(--neon-cyan);
-      text-decoration: none;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      position: relative;
-      padding: 10px 20px;
-      transition: all 0.3s ease;
-    }
-
-    nav a::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: var(--neon-magenta);
-      transform: translateX(-50%);
-      transition: width 0.3s ease;
-      box-shadow: var(--glow-magenta);
-    }
-
-    nav a:hover {
-      color: var(--neon-magenta);
-      text-shadow: var(--glow-magenta);
-    }
-
-    nav a:hover::before {
-      width: 100%;
     }
 
     .container {
-      position: relative;
-      z-index: 1;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 20px;
+      display: flex;
+      min-height: 100vh;
     }
 
-    section {
-      margin-bottom: 80px;
-      animation: fadeInUp 0.8s ease forwards;
-      opacity: 0;
-    }
-
-    section:nth-child(1) { animation-delay: 0.2s; }
-    section:nth-child(2) { animation-delay: 0.4s; }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-    }
-
-    h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 900;
-      font-size: 48px;
-      text-align: center;
-      margin-bottom: 50px;
-      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      position: relative;
-      animation: glitchText 3s infinite;
-    }
-
-    @keyframes glitchText {
-      0%, 100% { text-shadow: none; }
-      25% { text-shadow: 2px 2px var(--neon-cyan), -2px -2px var(--neon-magenta); }
-      50% { text-shadow: -2px 2px var(--neon-magenta), 2px -2px var(--neon-cyan); }
-      75% { text-shadow: 2px -2px var(--neon-cyan), -2px 2px var(--neon-magenta); }
-    }
-
-    h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 28px;
-      color: var(--neon-cyan);
-      text-shadow: var(--glow-cyan);
-      margin-bottom: 25px;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      position: relative;
-      padding-left: 20px;
-    }
-
-    h2::before {
-      content: '▸';
-      position: absolute;
-      left: 0;
-      color: var(--neon-magenta);
-      text-shadow: var(--glow-magenta);
-      animation: blink 1.5s infinite;
-    }
-
-    @keyframes blink {
-      0%, 49% { opacity: 1; }
-      50%, 100% { opacity: 0; }
-    }
-
-    .crypto-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(15px);
-      border: 2px solid rgba(0, 255, 247, 0.3);
-      border-radius: 15px;
-      padding: 25px;
-      margin-bottom: 25px;
+    .section {
+      flex: 1;
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       position: relative;
       overflow: hidden;
-      transition: all 0.4s ease;
     }
 
-    .crypto-card::before {
+    /* Left section - Wsparcie */
+    .section-wsparcie {
+      background: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    .section-wsparcie::before {
       content: '';
       position: absolute;
       top: -50%;
       left: -50%;
       width: 200%;
       height: 200%;
-      background: linear-gradient(
-        45deg,
-        transparent,
-        rgba(0, 255, 247, 0.1),
-        transparent
-      );
-      transform: rotate(45deg);
-      transition: all 0.6s ease;
+      background: radial-gradient(circle at 30% 50%, rgba(37, 99, 235, 0.03), transparent 50%);
+      animation: floatLeft 20s ease-in-out infinite;
+      pointer-events: none;
     }
 
-    .crypto-card:hover {
-      border-color: var(--neon-cyan);
-      box-shadow: var(--glow-cyan), inset 0 0 20px rgba(0, 255, 247, 0.1);
-      transform: translateY(-5px);
+    @keyframes floatLeft {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(30px, -30px) rotate(5deg); }
     }
 
-    .crypto-card:hover::before {
-      left: 100%;
+    /* Right section - Sociale */
+    .section-sociale {
+      background: var(--bg-dark);
+      color: var(--text-light);
+    }
+
+    .section-sociale::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 70% 50%, rgba(220, 38, 38, 0.08), transparent 50%);
+      animation: floatRight 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes floatRight {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(-30px, 30px) rotate(-5deg); }
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 520px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .section-title {
+      font-size: 52px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .section-wsparcie .section-title {
+      color: var(--accent-left);
+    }
+
+    .section-sociale .section-title {
+      color: var(--accent-right);
+    }
+
+    .section-subtitle {
+      font-size: 18px;
+      opacity: 0.6;
+      margin-bottom: 48px;
+      font-weight: 400;
+    }
+
+    .category-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      margin-top: 40px;
+      opacity: 0.5;
+    }
+
+    .category-title:first-of-type {
+      margin-top: 0;
+    }
+
+    /* Crypto cards */
+    .crypto-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .crypto-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-left), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .crypto-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--hover-shadow);
+      border-color: var(--accent-left);
+    }
+
+    .crypto-item:hover::before {
+      opacity: 1;
+    }
+
+    .crypto-item.copied {
+      animation: copyFlash 0.6s ease;
+    }
+
+    @keyframes copyFlash {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px) scale(1.02); }
     }
 
     .crypto-name {
-      font-family: 'Orbitron', sans-serif;
+      font-size: 15px;
       font-weight: 700;
-      font-size: 20px;
-      color: var(--neon-magenta);
-      text-shadow: var(--glow-magenta);
-      margin-bottom: 15px;
-      letter-spacing: 2px;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .crypto-copy-hint {
+      font-size: 11px;
+      opacity: 0;
+      color: var(--accent-left);
+      font-weight: 600;
+      transition: opacity 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .crypto-item:hover .crypto-copy-hint {
+      opacity: 1;
     }
 
     .crypto-address {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 14px;
-      color: #00fff7;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-dark);
+      opacity: 0.7;
       word-break: break-all;
-      background: rgba(0, 255, 247, 0.05);
-      padding: 15px;
-      border-radius: 8px;
-      border: 1px solid rgba(0, 255, 247, 0.2);
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.3s ease;
+      line-height: 1.6;
     }
 
-    .crypto-address:hover {
-      background: rgba(0, 255, 247, 0.1);
-      border-color: var(--neon-cyan);
-    }
-
+    /* Tipply link */
     .tipply-link {
-      display: inline-block;
-      background: linear-gradient(135deg, var(--neon-magenta), var(--neon-cyan));
-      color: var(--dark-bg);
-      font-family: 'Orbitron', sans-serif;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--text-dark);
+      color: var(--text-light);
       font-weight: 700;
-      font-size: 20px;
+      font-size: 16px;
       text-decoration: none;
-      padding: 20px 40px;
-      border-radius: 50px;
+      padding: 18px 36px;
+      border-radius: 12px;
       margin-top: 20px;
-      transition: all 0.4s ease;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
     }
@@ -297,50 +236,42 @@
     .tipply-link::before {
       content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
     }
 
     .tipply-link:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 40px rgba(255, 0, 255, 0.8);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(37, 99, 235, 0.3);
     }
 
     .tipply-link:hover::before {
-      width: 300px;
-      height: 300px;
+      left: 100%;
     }
 
-    .social-links {
+    /* Social links */
+    .social-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
     }
 
     .social-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--card-bg);
-      backdrop-filter: blur(15px);
-      border: 2px solid rgba(255, 0, 255, 0.3);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
       padding: 20px;
-      color: var(--neon-magenta);
+      text-align: center;
+      color: var(--text-light);
       text-decoration: none;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.4s ease;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
     }
@@ -349,265 +280,251 @@
       content: '';
       position: absolute;
       top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.3), transparent);
-      transition: left 0.6s ease;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent-right);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
     }
 
     .social-link:hover {
-      border-color: var(--neon-magenta);
-      box-shadow: var(--glow-magenta);
-      color: var(--neon-cyan);
-      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent-right);
+      transform: translateY(-2px);
     }
 
     .social-link:hover::before {
-      left: 100%;
+      transform: scaleX(1);
     }
 
-    .platform-info {
-      background: var(--card-bg);
-      backdrop-filter: blur(15px);
-      border: 2px solid rgba(255, 252, 0, 0.3);
+    /* Platform info */
+    .platform-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 12px;
       padding: 20px;
-      margin-top: 20px;
+      margin-bottom: 12px;
       transition: all 0.3s ease;
     }
 
-    .platform-info:hover {
-      border-color: var(--neon-yellow);
-      box-shadow: 0 0 20px rgba(255, 252, 0, 0.3);
+    .platform-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
     }
 
     .platform-name {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      color: var(--neon-yellow);
-      margin-bottom: 10px;
+      font-size: 13px;
+      opacity: 0.5;
+      margin-bottom: 8px;
+      text-transform: uppercase;
       letter-spacing: 1px;
+      font-weight: 600;
     }
 
     .platform-username {
-      font-family: 'Share Tech Mono', monospace;
-      color: #fff;
-      font-size: 18px;
-      padding: 10px;
-      background: rgba(255, 252, 0, 0.05);
-      border-radius: 6px;
-      border: 1px solid rgba(255, 252, 0, 0.2);
-    }
-
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.6);
-      border-top: 1px solid rgba(0, 255, 247, 0.2);
-      margin-top: 60px;
-      animation: fadeIn 1s ease 1s forwards;
-      opacity: 0;
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    footer::before {
-      content: '⚡ ';
-      color: var(--neon-yellow);
-    }
-
-    footer::after {
-      content: ' ⚡';
-      color: var(--neon-yellow);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      h1 { font-size: 36px; }
-      h2 { font-size: 22px; }
-      nav { gap: 20px; }
-      nav a { font-size: 16px; padding: 8px 15px; }
-      .social-links { grid-template-columns: 1fr; }
-    }
-
-    /* Scanline effect */
-    @keyframes scanline {
-      0% { transform: translateY(-100%); }
-      100% { transform: translateY(100vh); }
-    }
-
-    .scanline {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(transparent, rgba(0, 255, 247, 0.5), transparent);
-      animation: scanline 6s linear infinite;
-      pointer-events: none;
-      z-index: 1000;
-    }
-
-    /* Smooth scroll */
-    html {
-      scroll-behavior: smooth;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      font-weight: 600;
     }
 
     /* Copy notification */
     .copy-notification {
       position: fixed;
-      top: 50%;
+      top: 40px;
       left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      border: 2px solid var(--neon-cyan);
-      box-shadow: var(--glow-cyan);
-      padding: 30px 50px;
-      border-radius: 15px;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 24px;
-      color: var(--neon-cyan);
-      text-shadow: var(--glow-cyan);
+      transform: translateX(-50%) translateY(-100px);
+      background: var(--text-dark);
+      color: var(--text-light);
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
       z-index: 10000;
-      pointer-events: none;
-      transition: all 0.3s ease;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .copy-notification.show {
-      transform: translate(-50%, -50%) scale(1);
-      animation: copyPulse 0.6s ease;
-    }
-
-    @keyframes copyPulse {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); }
-      50% { transform: translate(-50%, -50%) scale(1.1); }
-    }
-
-    /* Click indicator on crypto cards */
-    .crypto-address::after {
-      content: '[ KLIKNIJ ABY SKOPIOWAĆ ]';
-      display: block;
-      margin-top: 12px;
-      font-size: 11px;
-      color: var(--neon-magenta);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-shadow: var(--glow-magenta);
-      text-align: center;
-      position: relative;
-    }
-
-    .crypto-address:hover::after {
+      transform: translateX(-50%) translateY(0);
       opacity: 1;
     }
 
-    .crypto-address:hover {
-      background: rgba(0, 255, 247, 0.15);
-      border-color: var(--neon-cyan);
-      box-shadow: inset var(--glow-cyan);
+    /* Footer */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px;
+      text-align: center;
+      font-size: 13px;
+      opacity: 0.4;
+      font-weight: 500;
+      background: linear-gradient(to top, rgba(10, 10, 10, 0.8), transparent);
+      color: #fff;
+      backdrop-filter: blur(10px);
+      z-index: 100;
     }
 
-    /* Active crypto card animation */
-    .crypto-card.copied {
-      animation: cardFlash 0.5s ease;
-    }
-
-    @keyframes cardFlash {
-      0%, 100% { 
-        border-color: rgba(0, 255, 247, 0.3);
-        box-shadow: none;
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .container {
+        flex-direction: column;
       }
-      50% { 
-        border-color: var(--neon-cyan);
-        box-shadow: var(--glow-cyan), inset 0 0 30px rgba(0, 255, 247, 0.3);
-        transform: scale(1.02);
+
+      .section {
+        min-height: 100vh;
+        padding: 60px 40px;
+      }
+
+      .section-title {
+        font-size: 42px;
+      }
+
+      footer {
+        position: relative;
+        background: var(--bg-dark);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 40px 24px;
+      }
+
+      .section-title {
+        font-size: 36px;
+      }
+
+      .social-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .content {
+        max-width: 100%;
+      }
+    }
+
+    /* Scroll indicator (only visible on mobile) */
+    .scroll-indicator {
+      display: none;
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      opacity: 0.4;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    @media (max-width: 1024px) {
+      .scroll-indicator {
+        display: block;
       }
     }
   </style>
 </head>
 <body>
-  <div class="scanline"></div>
-  
   <!-- Copy notification -->
   <div class="copy-notification" id="copyNotification">
-    ✓ SKOPIOWANO DO SCHOWKA
+    ✓ Skopiowano do schowka
   </div>
-  
-  <nav>
-    <a href="#wsparcie">☕ Wsparcie</a>
-    <a href="#sociale">📱 Sociale</a>
-  </nav>
 
   <div class="container">
-    <section id="wsparcie">
-      <h1>☕ Wsparcie</h1>
-      
-      <h2>Krypto</h2>
-      
-      <div class="crypto-card">
-        <div class="crypto-name">Bitcoin (BTC)</div>
-        <div class="crypto-address">bc1q934h5s9kc0jh96hapcjjss3t7hwm5tdarnu7px</div>
-      </div>
+    <!-- Left section: Wsparcie -->
+    <div class="section section-wsparcie">
+      <div class="content">
+        <h1 class="section-title">☕ Wsparcie</h1>
+        <p class="section-subtitle">Jeśli chcesz wesprzeć, tutaj znajdziesz wszystkie opcje</p>
 
-      <div class="crypto-card">
-        <div class="crypto-name">Ethereum / BNB / USDT (ERC20)</div>
-        <div class="crypto-address">0x5E5c37f1C94fd427F8F796f295f6F5A26686c3Af</div>
-      </div>
+        <h3 class="category-title">Kryptowaluty</h3>
 
-      <div class="crypto-card">
-        <div class="crypto-name">Solana (SOL)</div>
-        <div class="crypto-address">3knztrSRu7rbwQcx9odfcbEwFKyHiF5r1o8sg9pFyQ4w</div>
-      </div>
+        <div class="crypto-item" data-address="bc1q934h5s9kc0jh96hapcjjss3t7hwm5tdarnu7px">
+          <div class="crypto-name">
+            Bitcoin (BTC)
+            <span class="crypto-copy-hint">Kliknij</span>
+          </div>
+          <div class="crypto-address">bc1q934h5s9kc0jh96hapcjjss3t7hwm5tdarnu7px</div>
+        </div>
 
-      <div class="crypto-card">
-        <div class="crypto-name">Dogecoin (DOGE)</div>
-        <div class="crypto-address">DExHR69MCe1TPQ29R24B9ruFsF8UjbWGx4</div>
-      </div>
+        <div class="crypto-item" data-address="0x5E5c37f1C94fd427F8F796f295f6F5A26686c3Af">
+          <div class="crypto-name">
+            Ethereum / BNB / USDT (ERC20)
+            <span class="crypto-copy-hint">Kliknij</span>
+          </div>
+          <div class="crypto-address">0x5E5c37f1C94fd427F8F796f295f6F5A26686c3Af</div>
+        </div>
 
-      <h2>Tipy PLN</h2>
-      <a href="https://tipply.pl/@niskiklucz" target="_blank" class="tipply-link">
-        tipply.pl/@niskiklucz
-      </a>
-    </section>
+        <div class="crypto-item" data-address="3knztrSRu7rbwQcx9odfcbEwFKyHiF5r1o8sg9pFyQ4w">
+          <div class="crypto-name">
+            Solana (SOL)
+            <span class="crypto-copy-hint">Kliknij</span>
+          </div>
+          <div class="crypto-address">3knztrSRu7rbwQcx9odfcbEwFKyHiF5r1o8sg9pFyQ4w</div>
+        </div>
 
-    <section id="sociale">
-      <h1>📱 Sociale</h1>
-      
-      <div class="social-links">
-        <a class="social-link" href="https://www.youtube.com/@maciekpodgurny" target="_blank">
-          YouTube
-        </a>
-        <a class="social-link" href="https://www.instagram.com/maciekpodgurny/" target="_blank">
-          Instagram
-        </a>
-        <a class="social-link" href="https://www.tiktok.com/@krakowskicygan1" target="_blank">
-          TikTok
-        </a>
-        <a class="social-link" href="https://steamcommunity.com/id/maciekpodgurny/" target="_blank">
-          Steam
+        <div class="crypto-item" data-address="DExHR69MCe1TPQ29R24B9ruFsF8UjbWGx4">
+          <div class="crypto-name">
+            Dogecoin (DOGE)
+            <span class="crypto-copy-hint">Kliknij</span>
+          </div>
+          <div class="crypto-address">DExHR69MCe1TPQ29R24B9ruFsF8UjbWGx4</div>
+        </div>
+
+        <h3 class="category-title">Tipy w PLN</h3>
+        <a href="https://tipply.pl/@niskiklucz" target="_blank" class="tipply-link">
+          tipply.pl/@niskiklucz
         </a>
       </div>
+      <div class="scroll-indicator">Przewiń w dół →</div>
+    </div>
 
-      <div class="platform-info">
-        <div class="platform-name">Discord</div>
-        <div class="platform-username">maciekpodgurny</div>
-      </div>
+    <!-- Right section: Sociale -->
+    <div class="section section-sociale">
+      <div class="content">
+        <h1 class="section-title">📱 Sociale</h1>
+        <p class="section-subtitle">Gdzie mnie znajdziesz w sieci</p>
 
-      <div class="platform-info">
-        <div class="platform-name">Epic Games</div>
-        <div class="platform-username">maciekpodgurny</div>
+        <h3 class="category-title">Platformy</h3>
+
+        <div class="social-grid">
+          <a class="social-link" href="https://www.youtube.com/@maciekpodgurny" target="_blank">
+            YouTube
+          </a>
+          <a class="social-link" href="https://www.instagram.com/maciekpodgurny/" target="_blank">
+            Instagram
+          </a>
+          <a class="social-link" href="https://www.tiktok.com/@krakowskicygan1" target="_blank">
+            TikTok
+          </a>
+          <a class="social-link" href="https://steamcommunity.com/id/maciekpodgurny/" target="_blank">
+            Steam
+          </a>
+        </div>
+
+        <h3 class="category-title">Gaming</h3>
+
+        <div class="platform-item">
+          <div class="platform-name">Discord</div>
+          <div class="platform-username">maciekpodgurny</div>
+        </div>
+
+        <div class="platform-item">
+          <div class="platform-name">Epic Games</div>
+          <div class="platform-username">maciekpodgurny</div>
+        </div>
       </div>
-    </section>
+    </div>
   </div>
 
   <footer>
@@ -617,85 +534,32 @@
   <script>
     // Copy to clipboard functionality
     document.addEventListener('DOMContentLoaded', function() {
-      const cryptoAddresses = document.querySelectorAll('.crypto-address');
+      const cryptoItems = document.querySelectorAll('.crypto-item');
       const notification = document.getElementById('copyNotification');
       
-      cryptoAddresses.forEach(address => {
-        address.addEventListener('click', function() {
-          const text = this.textContent.trim();
+      cryptoItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const address = this.getAttribute('data-address');
           
           // Copy to clipboard
-          navigator.clipboard.writeText(text).then(() => {
-            // Add flash animation to card
-            const card = this.closest('.crypto-card');
-            card.classList.add('copied');
-            setTimeout(() => card.classList.remove('copied'), 500);
+          navigator.clipboard.writeText(address).then(() => {
+            // Add flash animation
+            this.classList.add('copied');
+            setTimeout(() => this.classList.remove('copied'), 600);
             
             // Show notification
             notification.classList.add('show');
             
-            // Hide notification after 2 seconds
+            // Hide notification after 2.5 seconds
             setTimeout(() => {
               notification.classList.remove('show');
-            }, 2000);
+            }, 2500);
           }).catch(err => {
             console.error('Failed to copy:', err);
           });
         });
       });
-
-      // Smooth scroll with animation
-      const navLinks = document.querySelectorAll('nav a');
-      
-      navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          
-          const targetId = this.getAttribute('href');
-          const targetSection = document.querySelector(targetId);
-          
-          if (targetSection) {
-            // Add exit animation to current section
-            const allSections = document.querySelectorAll('section');
-            allSections.forEach(section => {
-              section.style.animation = 'fadeOut 0.3s ease forwards';
-            });
-            
-            // Scroll to target
-            setTimeout(() => {
-              targetSection.scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-              });
-              
-              // Reset and re-trigger enter animation
-              setTimeout(() => {
-                allSections.forEach(section => {
-                  section.style.animation = '';
-                });
-                targetSection.style.animation = 'fadeInUp 0.6s ease forwards';
-              }, 300);
-            }, 300);
-          }
-        });
-      });
     });
-
-    // Add fadeOut animation
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes fadeOut {
-        from {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        to {
-          opacity: 0;
-          transform: translateY(-20px);
-        }
-      }
-    `;
-    document.head.appendChild(style);
   </script>
 </body>
 </html>
