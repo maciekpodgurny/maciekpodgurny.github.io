@@ -452,10 +452,96 @@
       pointer-events: none;
       z-index: 1000;
     }
+
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Copy notification */
+    .copy-notification {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 2px solid var(--neon-cyan);
+      box-shadow: var(--glow-cyan);
+      padding: 30px 50px;
+      border-radius: 15px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--neon-cyan);
+      text-shadow: var(--glow-cyan);
+      z-index: 10000;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .copy-notification.show {
+      transform: translate(-50%, -50%) scale(1);
+      animation: copyPulse 0.6s ease;
+    }
+
+    @keyframes copyPulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    /* Click indicator on crypto cards */
+    .crypto-address::after {
+      content: '[ KLIKNIJ ABY SKOPIOWAĆ ]';
+      display: block;
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--neon-magenta);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-shadow: var(--glow-magenta);
+      text-align: center;
+      position: relative;
+    }
+
+    .crypto-address:hover::after {
+      opacity: 1;
+    }
+
+    .crypto-address:hover {
+      background: rgba(0, 255, 247, 0.15);
+      border-color: var(--neon-cyan);
+      box-shadow: inset var(--glow-cyan);
+    }
+
+    /* Active crypto card animation */
+    .crypto-card.copied {
+      animation: cardFlash 0.5s ease;
+    }
+
+    @keyframes cardFlash {
+      0%, 100% { 
+        border-color: rgba(0, 255, 247, 0.3);
+        box-shadow: none;
+      }
+      50% { 
+        border-color: var(--neon-cyan);
+        box-shadow: var(--glow-cyan), inset 0 0 30px rgba(0, 255, 247, 0.3);
+        transform: scale(1.02);
+      }
+    }
   </style>
 </head>
 <body>
   <div class="scanline"></div>
+  
+  <!-- Copy notification -->
+  <div class="copy-notification" id="copyNotification">
+    ✓ SKOPIOWANO DO SCHOWKA
+  </div>
   
   <nav>
     <a href="#wsparcie">☕ Wsparcie</a>
@@ -527,5 +613,89 @@
   <footer>
     Wysyłasz = jesteś legendą. Nie wysyłasz = też spoko, ale kurwa wiesz.
   </footer>
+
+  <script>
+    // Copy to clipboard functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const cryptoAddresses = document.querySelectorAll('.crypto-address');
+      const notification = document.getElementById('copyNotification');
+      
+      cryptoAddresses.forEach(address => {
+        address.addEventListener('click', function() {
+          const text = this.textContent.trim();
+          
+          // Copy to clipboard
+          navigator.clipboard.writeText(text).then(() => {
+            // Add flash animation to card
+            const card = this.closest('.crypto-card');
+            card.classList.add('copied');
+            setTimeout(() => card.classList.remove('copied'), 500);
+            
+            // Show notification
+            notification.classList.add('show');
+            
+            // Hide notification after 2 seconds
+            setTimeout(() => {
+              notification.classList.remove('show');
+            }, 2000);
+          }).catch(err => {
+            console.error('Failed to copy:', err);
+          });
+        });
+      });
+
+      // Smooth scroll with animation
+      const navLinks = document.querySelectorAll('nav a');
+      
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          const targetSection = document.querySelector(targetId);
+          
+          if (targetSection) {
+            // Add exit animation to current section
+            const allSections = document.querySelectorAll('section');
+            allSections.forEach(section => {
+              section.style.animation = 'fadeOut 0.3s ease forwards';
+            });
+            
+            // Scroll to target
+            setTimeout(() => {
+              targetSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+              });
+              
+              // Reset and re-trigger enter animation
+              setTimeout(() => {
+                allSections.forEach(section => {
+                  section.style.animation = '';
+                });
+                targetSection.style.animation = 'fadeInUp 0.6s ease forwards';
+              }, 300);
+            }, 300);
+          }
+        });
+      });
+    });
+
+    // Add fadeOut animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
 </body>
 </html>
