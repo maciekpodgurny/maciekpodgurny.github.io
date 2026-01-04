@@ -2,55 +2,81 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Wsparcie</title>
+  <title>Wsparcie & Sociale</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       background: #0f0f0f;
       color: #fff;
       font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 40px;
+      margin: 0;
+      padding: 0;
     }
-    .box {
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #1a1a1a;
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      color: #00aaff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: #00ff99; }
+
+    section {
+      padding: 50px 20px;
       max-width: 600px;
       margin: auto;
-      background: #1a1a1a;
-      padding: 20px;
-      border-radius: 10px;
     }
+    h1, h2 { text-align: center; }
     code {
       word-break: break-all;
       color: #00ff99;
     }
-    a {
-      color: #00aaff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    h2 { margin-top: 30px; }
+    a.social-link { display:block; margin: 5px 0; color:#00aaff; }
+    a.social-link:hover { color: #00ff99; }
+    footer { text-align:center; padding:20px; font-size:12px; opacity:0.7; }
   </style>
 </head>
 <body>
-  <div class="box">
-    <h1>☕ Wesprzyj mnie</h1>
 
+  <nav>
+    <a href="#wsparcie">Wsparcie</a>
+    <a href="#sociale">Sociale</a>
+  </nav>
+
+  <section id="wsparcie">
+    <h1>☕ Wsparcie</h1>
     <h2>Krypto</h2>
     <p>BTC<br><code>bc1q934h5s9kc0jh96hapcjjss3t7hwm5tdarnu7px</code></p>
-    <p>ETH / BNB / USDT (ERC20)<br>
-      <code>0x5E5c37f1C94fd427F8F796f295f6F5A26686c3Af</code>
-    </p>
+    <p>ETH / BNB / USDT (ERC20)<br><code>0x5E5c37f1C94fd427F8F796f295f6F5A26686c3Af</code></p>
     <p>SOL<br><code>3knztrSRu7rbwQcx9odfcbEwFKyHiF5r1o8sg9pFyQ4w</code></p>
     <p>DOGE<br><code>DExHR69MCe1TPQ29R24B9ruFsF8UjbWGx4</code></p>
 
     <h2>Tipy PLN</h2>
-    <p><a href="https://tipply.pl/@niskiklucz" target="_blank">
-      👉 tipply.pl/@niskiklucz
-    </a></p>
+    <p><a href="https://tipply.pl/@niskiklucz" target="_blank">tipply.pl/@niskiklucz</a></p>
+  </section>
 
-    <p style="margin-top:30px; font-size:12px; opacity:.7">
-      Wysyłasz = jesteś legendą. Nie wysyłasz = też spoko, ale kurwa wiesz.
-    </p>
-  </div>
+  <section id="sociale">
+    <h1>📱 Sociale</h1>
+    <a class="social-link" href="https://www.youtube.com/@maciekpodgurny" target="_blank">YouTube</a>
+    <a class="social-link" href="https://www.instagram.com/maciekpodgurny/" target="_blank">Instagram</a>
+    <a class="social-link" href="https://www.tiktok.com/@krakowskicygan1" target="_blank">TikTok</a>
+    <a class="social-link" href="https://steamcommunity.com/id/maciekpodgurny/" target="_blank">Steam</a>
+    <p>Discord: <code>maciekpodgurny</code></p>
+    <p>Epic Games: <code>maciekpodgurny</code></p>
+  </section>
+
+  <footer>
+    Wysyłasz = jesteś legendą. Nie wysyłasz = też spoko, ale kurwa wiesz.
+  </footer>
+
 </body>
 </html>
